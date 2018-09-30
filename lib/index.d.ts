@@ -133,6 +133,49 @@ export interface IListFormSubmitSummary extends ICommonReturn {
         };
     };
 }
+export interface IListFormSummary extends ICommonReturn {
+    a: number;
+    u: number;
+    ifp: number;
+    ftkv: number;
+    fcki: number;
+    m: number;
+    c: number;
+    /**
+     * 分组信息
+     */
+    g: [number, string, number, number][];
+    _U: string;
+    list: {
+        d: [number, number, number, number, null, string, string, string, number, number, 
+        /**
+         * 创建者
+         */
+        number, number, {
+            apf: string;
+            apt: string;
+        }, null][];
+        mp_frLA: {
+            [key: string]: string;
+        };
+        mp_frCA: {
+            [key: string]: string;
+        };
+        mp_frUA: {
+            [key: string]: string;
+        };
+        /**
+         * 创建者
+         */
+        mpUs: {
+            [key: string]: [string, null];
+        };
+    };
+    /**
+     * 是否有下一组
+     */
+    nxt: boolean;
+}
 export interface IMikeCRMAPIOptions {
     debug?: boolean;
     apiHost?: string;
@@ -164,6 +207,16 @@ api
   .then(reply => {
     console.log(JSON.stringify(reply))
     // > {"r":0,"fr":["new",2,"870aw","zswang.mikecrm.com/870aw",2,0,0,null,null,null,null,null,0,null,null,{"stt":"Thank you","std":""},null],"ifp":false,"_U":"/uploads/images","list":null}
+    return api.getListFormSummary()
+  })
+  .then(reply => {
+    console.log(JSON.stringify(reply))
+    // > {"r":0,"a":0,"u":0,"ifp":1,"ftkv":0,"fcki":0,"m":0,"c":0,"g":[[2001,"One",1,0],[2002,"Two",1,0],[2003,"Three",1,0]],"_U":"empty/","list":{"d":[[200015053,0,0,1,null,null,null,"new",0,0,668,null,null,null]],"mp_frLA":{"200249374":"2018-09-29 23:17"},"mp_frCA":{"200249374":"2018-09-29 17:51"},"mp_frUA":{"200249374":"2018-09-29 23:26"},"mpUs":{"668":["zswang",1]}},"nxt":true}
+    return api.getListFormAll(1, 1)
+  })
+  .then(reply => {
+    console.log(JSON.stringify(reply))
+    // > {"r":0,"a":0,"u":0,"ifp":1,"ftkv":0,"fcki":0,"m":0,"c":0,"g":[[2001,"One",1,0],[2002,"Two",1,0],[2003,"Three",1,0]],"_U":"empty/","list":{"d":[[200015053,0,0,1,null,null,null,"new",0,0,668,null,null,null]],"mp_frLA":{"200249374":"2018-09-29 23:17"},"mp_frCA":{"200249374":"2018-09-29 17:51"},"mp_frUA":{"200249374":"2018-09-29 23:26"},"mpUs":{"668":["zswang",1]}},"nxt":true}
     // * done
   })
   .then(() => {
@@ -173,6 +226,36 @@ api
     request('http://localhost:3636/close')
     console.error(err)
   })
+   ```
+   ```js
+   const api2 = new mikecrm.MikeCRMAPI({
+  apiHost: 'http://localhost:404/',
+  account: '{"p":"zswang"}',
+})
+api2.login().catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
+api2.getPersonalData().catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
+api2.getListFormSummary().catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
+api2.getListFormAll(0).catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
+api2.getListFormSubmitSummary(100).catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
+api2.getListFormSubmitAll(100, 300).catch(err => {
+  console.log(JSON.stringify(err))
+  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+})
    ```
  */
 export declare class MikeCRMAPI extends RequestBase {
@@ -199,5 +282,13 @@ export declare class MikeCRMAPI extends RequestBase {
      * @param next 下一组编号
      */
     getListFormSubmitAll(form: number, next: number): Promise<IListFormSubmitSummary>;
+    /**
+     * 获取表单详情
+     */
+    getListFormSummary(): Promise<IListFormSummary>;
+    /**
+     * 获取完整表单详情
+     */
+    getListFormAll(pageNo: number, sort?: number): Promise<IListFormSummary>;
 }
 //# sourceMappingURL=index.d.ts.map

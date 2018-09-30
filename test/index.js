@@ -38,6 +38,16 @@ api
   .then(reply => {
     examplejs_print(JSON.stringify(reply))
     assert.equal(examplejs_printLines.join("\n"), "{\"r\":0,\"fr\":[\"new\",2,\"870aw\",\"zswang.mikecrm.com/870aw\",2,0,0,null,null,null,null,null,0,null,null,{\"stt\":\"Thank you\",\"std\":\"\"},null],\"ifp\":false,\"_U\":\"/uploads/images\",\"list\":null}"); examplejs_printLines = [];
+    return api.getListFormSummary()
+  })
+  .then(reply => {
+    examplejs_print(JSON.stringify(reply))
+    assert.equal(examplejs_printLines.join("\n"), "{\"r\":0,\"a\":0,\"u\":0,\"ifp\":1,\"ftkv\":0,\"fcki\":0,\"m\":0,\"c\":0,\"g\":[[2001,\"One\",1,0],[2002,\"Two\",1,0],[2003,\"Three\",1,0]],\"_U\":\"empty/\",\"list\":{\"d\":[[200015053,0,0,1,null,null,null,\"new\",0,0,668,null,null,null]],\"mp_frLA\":{\"200249374\":\"2018-09-29 23:17\"},\"mp_frCA\":{\"200249374\":\"2018-09-29 17:51\"},\"mp_frUA\":{\"200249374\":\"2018-09-29 23:26\"},\"mpUs\":{\"668\":[\"zswang\",1]}},\"nxt\":true}"); examplejs_printLines = [];
+    return api.getListFormAll(1, 1)
+  })
+  .then(reply => {
+    examplejs_print(JSON.stringify(reply))
+    assert.equal(examplejs_printLines.join("\n"), "{\"r\":0,\"a\":0,\"u\":0,\"ifp\":1,\"ftkv\":0,\"fcki\":0,\"m\":0,\"c\":0,\"g\":[[2001,\"One\",1,0],[2002,\"Two\",1,0],[2003,\"Three\",1,0]],\"_U\":\"empty/\",\"list\":{\"d\":[[200015053,0,0,1,null,null,null,\"new\",0,0,668,null,null,null]],\"mp_frLA\":{\"200249374\":\"2018-09-29 23:17\"},\"mp_frCA\":{\"200249374\":\"2018-09-29 17:51\"},\"mp_frUA\":{\"200249374\":\"2018-09-29 23:26\"},\"mpUs\":{\"668\":[\"zswang\",1]}},\"nxt\":true}"); examplejs_printLines = [];
     done();
   })
   .then(() => {
@@ -47,6 +57,34 @@ api
     request('http://localhost:3636/close')
     console.error(err)
   })
+   const api2 = new mikecrm.MikeCRMAPI({
+  apiHost: 'http://localhost:404/',
+  account: '{"p":"zswang"}',
+})
+api2.login().catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
+api2.getPersonalData().catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
+api2.getListFormSummary().catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
+api2.getListFormAll(0).catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
+api2.getListFormSubmitSummary(100).catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
+api2.getListFormSubmitAll(100, 300).catch(err => {
+  examplejs_print(JSON.stringify(err))
+  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+})
   });
           
 });

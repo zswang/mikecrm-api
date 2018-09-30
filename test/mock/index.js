@@ -32,6 +32,56 @@ const server = http.createServer((req, res) => {
       )
       return
 
+    case '/form/handleGetListForm_all.php':
+    case '/form/handleGetListFormSummary.php':
+      res.end(
+        JSON.stringify({
+          r: 0,
+          a: 0,
+          u: 0,
+          ifp: 1,
+          ftkv: 0,
+          fcki: 0,
+          m: 0,
+          c: 0,
+          g: [[2001, 'One', 1, 0], [2002, 'Two', 1, 0], [2003, 'Three', 1, 0]],
+          _U: 'empty/',
+          list: {
+            d: [
+              [
+                200015053,
+                0,
+                0,
+                1,
+                null,
+                null,
+                null,
+                'new',
+                0,
+                0,
+                668,
+                null,
+                null,
+                null,
+              ],
+            ],
+            mp_frLA: {
+              '200249374': '2018-09-29 23:17',
+            },
+            mp_frCA: {
+              '200249374': '2018-09-29 17:51',
+            },
+            mp_frUA: {
+              '200249374': '2018-09-29 23:26',
+            },
+            mpUs: { '668': ['zswang', 1] },
+          },
+          nxt: true,
+        }),
+        200
+      )
+      return
+
     case '/form_submit/handleGetListFormSubmit_all.php':
     case '/form_submit/handleGetListFormSubmitSummary.php':
       res.end(
