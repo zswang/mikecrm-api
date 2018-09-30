@@ -226,6 +226,7 @@ api
     console.error(err)
   })
    ```
+ * @example coverage
    ```js
    const api2 = new mikecrm.MikeCRMAPI({
   apiHost: 'http://localhost:404/',

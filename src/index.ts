@@ -193,6 +193,7 @@ export interface IMikeCRMAPIOptions {
    ```js
    (*<jdists import='?debug[desc="base"]' />*)
    ```
+ * @example coverage
    ```js
    (*<jdists import='?debug[desc="coverage"]' />*)
    ```

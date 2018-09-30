@@ -57,6 +57,10 @@ api
     request('http://localhost:3636/close')
     console.error(err)
   })
+  });
+          
+  it("coverage", function () {
+    examplejs_printLines = [];
    const api2 = new mikecrm.MikeCRMAPI({
   apiHost: 'http://localhost:404/',
   account: '{"p":"zswang"}',
