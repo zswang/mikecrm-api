@@ -170,7 +170,7 @@ export class MikeCRMAPI extends RequestBase {
             return
           }
           const cookie = String(res.headers['set-cookie'])
-          cookie.replace(/\b(uvi|PHPSESSID)=(\w+)\b/, (all, name, value) => {
+          cookie.replace(/\b(uvi|PHPSESSID)=(\w+)\b/g, (all, name, value) => {
             this[name] = value
             return ''
           })

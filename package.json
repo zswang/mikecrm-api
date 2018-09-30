@@ -1,8 +1,9 @@
 {
   "name": "mikecrm-api",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "mikecrm API",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "_update_version": "node version.js",
     "_dist": "gulp dist",
