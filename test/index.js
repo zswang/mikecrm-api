@@ -62,28 +62,28 @@ api
   account: '{"p":"zswang"}',
 })
 api2.login().catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
 api2.getPersonalData().catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
 api2.getListFormSummary().catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
 api2.getListFormAll(0).catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
 api2.getListFormSubmitSummary(100).catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
 api2.getListFormSubmitAll(100, 300).catch(err => {
-  examplejs_print(JSON.stringify(err))
-  assert.equal(examplejs_printLines.join("\n"), "{\"errno\":\"ECONNREFUSED\",\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":404}"); examplejs_printLines = [];
+  examplejs_print(JSON.stringify(err).indexOf('"port":404') >= 0)
+  assert.equal(examplejs_printLines.join("\n"), "true"); examplejs_printLines = [];
 })
   });
           

@@ -233,28 +233,28 @@ api
   account: '{"p":"zswang"}',
 })
 api2.login().catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
 api2.getPersonalData().catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
 api2.getListFormSummary().catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
 api2.getListFormAll(0).catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
 api2.getListFormSubmitSummary(100).catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
 api2.getListFormSubmitAll(100, 300).catch(err => {
-  console.log(JSON.stringify(err))
-  // > {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":404}
+  console.log(JSON.stringify(err).indexOf('"port":404') >= 0)
+  // > true
 })
    ```
  */
