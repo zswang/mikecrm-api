@@ -116,6 +116,9 @@ export interface IListFormSubmitSummary extends ICommonReturn {
   ifp: boolean
   _U: string
   list: {
+    /**
+     * 下一组编号
+     */
     nxt: number
     d: any[]
     mp_fsCA: { [key: string]: string }
@@ -201,7 +204,7 @@ export class MikeCRMAPI extends RequestBase {
    * 获取表单提交记录
    * @param form 表单编号
    */
-  getListFormSubmitSummary(form: number) {
+  getListFormSubmitSummary(form: number): Promise<IListFormSubmitSummary> {
     return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
       return this.request(
         `${this.options.apiHost}form_submit/handleGetListFormSubmitSummary.php`,
@@ -212,6 +215,31 @@ export class MikeCRMAPI extends RequestBase {
           },
           form: {
             d: JSON.stringify({ cvs: { i: form } }),
+          },
+        }
+      )
+    })
+  }
+
+  /**
+   * 获取完整表单提交记录
+   * @param form 表单编号
+   * @param next 下一组编号
+   */
+  getListFormSubmitAll(
+    form: number,
+    next: number
+  ): Promise<IListFormSubmitSummary> {
+    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
+      return this.request(
+        `${this.options.apiHost}form_submit/handleGetListFormSubmit_all.php`,
+        {
+          method: 'POST',
+          headers: {
+            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+          },
+          form: {
+            d: JSON.stringify({ cvs: { i: form, nxt: next } }),
           },
         }
       )
@@ -240,6 +268,12 @@ api
     // > {"r":0,"a":"zswang","n":"Wang Jihu","l":2012,"sd":0,"ll":"Beijing, China","p":"110","t":1,"d":0,"iw":0,"in":1,"im":1,"la":0,"ai":0,"avt":"empty.png"}
 
     return api.getListFormSubmitSummary(1)
+  })
+  .then(reply => {
+    console.log(JSON.stringify(reply))
+    // > {"r":0,"fr":["new",2,"870aw","zswang.mikecrm.com/870aw",2,0,0,null,null,null,null,null,0,null,null,{"stt":"Thank you","std":""},null],"ifp":false,"_U":"/uploads/images","list":null}
+
+    return api.getListFormSubmitAll(1, 0)
   })
   .then(reply => {
     console.log(JSON.stringify(reply))

@@ -33,6 +33,11 @@ api
   .then(reply => {
     examplejs_print(JSON.stringify(reply))
     assert.equal(examplejs_printLines.join("\n"), "{\"r\":0,\"fr\":[\"new\",2,\"870aw\",\"zswang.mikecrm.com/870aw\",2,0,0,null,null,null,null,null,0,null,null,{\"stt\":\"Thank you\",\"std\":\"\"},null],\"ifp\":false,\"_U\":\"/uploads/images\",\"list\":null}"); examplejs_printLines = [];
+    return api.getListFormSubmitAll(1, 0)
+  })
+  .then(reply => {
+    examplejs_print(JSON.stringify(reply))
+    assert.equal(examplejs_printLines.join("\n"), "{\"r\":0,\"fr\":[\"new\",2,\"870aw\",\"zswang.mikecrm.com/870aw\",2,0,0,null,null,null,null,null,0,null,null,{\"stt\":\"Thank you\",\"std\":\"\"},null],\"ifp\":false,\"_U\":\"/uploads/images\",\"list\":null}"); examplejs_printLines = [];
     done();
   })
   .then(() => {

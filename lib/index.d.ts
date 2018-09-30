@@ -114,6 +114,9 @@ export interface IListFormSubmitSummary extends ICommonReturn {
     ifp: boolean;
     _U: string;
     list: {
+        /**
+         * 下一组编号
+         */
         nxt: number;
         d: any[];
         mp_fsCA: {
@@ -156,6 +159,11 @@ api
   .then(reply => {
     console.log(JSON.stringify(reply))
     // > {"r":0,"fr":["new",2,"870aw","zswang.mikecrm.com/870aw",2,0,0,null,null,null,null,null,0,null,null,{"stt":"Thank you","std":""},null],"ifp":false,"_U":"/uploads/images","list":null}
+    return api.getListFormSubmitAll(1, 0)
+  })
+  .then(reply => {
+    console.log(JSON.stringify(reply))
+    // > {"r":0,"fr":["new",2,"870aw","zswang.mikecrm.com/870aw",2,0,0,null,null,null,null,null,0,null,null,{"stt":"Thank you","std":""},null],"ifp":false,"_U":"/uploads/images","list":null}
     // * done
   })
   .then(() => {
@@ -184,6 +192,12 @@ export declare class MikeCRMAPI extends RequestBase {
      * 获取表单提交记录
      * @param form 表单编号
      */
-    getListFormSubmitSummary(form: number): any;
+    getListFormSubmitSummary(form: number): Promise<IListFormSubmitSummary>;
+    /**
+     * 获取完整表单提交记录
+     * @param form 表单编号
+     * @param next 下一组编号
+     */
+    getListFormSubmitAll(form: number, next: number): Promise<IListFormSubmitSummary>;
 }
 //# sourceMappingURL=index.d.ts.map

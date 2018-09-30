@@ -32,6 +32,7 @@ const server = http.createServer((req, res) => {
       )
       return
 
+    case '/form_submit/handleGetListFormSubmit_all.php':
     case '/form_submit/handleGetListFormSubmitSummary.php':
       res.end(
         JSON.stringify({
