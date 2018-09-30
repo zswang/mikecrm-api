@@ -1,0 +1,46 @@
+{
+  "name": "mikecrm-api",
+  "version": "0.0.6",
+  "description": "mikecrm API",
+  "main": "lib/index.js",
+  "scripts": {
+    "_update_version": "node version.js",
+    "_dist": "gulp dist",
+    "test": "istanbul cover --hook-run-in-context node_modules/mocha/bin/_mocha -- -R spec",
+    "example": "gulp example",
+    "mocha": "mocha",
+    "debug": "ts-node debug.ts",
+    "dist": "npm run _update_version && npm run _dist && npm run test"
+  },
+  "homepage": "https://github.com/zswang/mikecrm-api",
+  "author": {
+    "name": "zswang",
+    "url": "http://weibo.com/zswang"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zswang/mikecrm-api.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.33",
+    "@types/request": "^2.0.8",
+    "gulp": "^4.0.0",
+    "gulp-examplejs": "0.0.9",
+    "gulp-jdists": "^2.2.3",
+    "gulp-linenum": "0.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "istanbul": "^0.4.5",
+    "merge2": "^1.2.2",
+    "mocha": "^5.2.0",
+    "should": "^13.2.3",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "irequest": "^0.1.0",
+    "request": "^2.88.0"
+  }
+}
