@@ -302,37 +302,53 @@ export class MikeCRMAPI extends RequestBase {
    * 获取当前账号信息
    */
   getPersonalData(): Promise<IPersonal> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}settings/handleGetPersonalData.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}settings/handleGetPersonalData.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+          }
+        )
+      })
   }
   /**
    * 获取表单提交记录
    * @param form 表单编号
    */
   getListFormSubmitSummary(form: number): Promise<IListFormSubmitSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form_submit/handleGetListFormSubmitSummary.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { i: form } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${
+            this.options.apiHost
+          }form_submit/handleGetListFormSubmitSummary.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { i: form } }),
+            },
+          }
+        )
+      })
   }
   /**
    * 获取完整表单提交记录
@@ -343,55 +359,76 @@ export class MikeCRMAPI extends RequestBase {
     form: number,
     next: number
   ): Promise<IListFormSubmitSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form_submit/handleGetListFormSubmit_all.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { i: form, nxt: next } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form_submit/handleGetListFormSubmit_all.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { i: form, nxt: next } }),
+            },
+          }
+        )
+      })
   }
   /**
    * 获取表单详情
    */
   getListFormSummary(): Promise<IListFormSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form/handleGetListFormSummary.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form/handleGetListFormSummary.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+          }
+        )
+      })
   }
   /**
    * 获取完整表单详情
    */
   getListFormAll(pageNo: number, sort: number = 1): Promise<IListFormSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form/handleGetListForm_all.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { pgn: pageNo, sort: sort } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form/handleGetListForm_all.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { pgn: pageNo, sort: sort } }),
+            },
+          }
+        )
+      })
   }
 }
 /*<remove>*/

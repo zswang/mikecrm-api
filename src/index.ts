@@ -1,6 +1,9 @@
 import * as request from 'request'
 import { RequestBase } from 'irequest'
 
+/**
+ * 字段类型
+ */
 export enum FieldType {
   Radio = 1,
   Dropdown = 3,
@@ -53,6 +56,9 @@ export enum FieldType {
   Department = 61,
 }
 
+/**
+ * 通用返回信息
+ */
 export interface ICommonReturn {
   /**
    * 返回状态 0 为成功，非 0 为错误
@@ -60,6 +66,9 @@ export interface ICommonReturn {
   r: number
 }
 
+/**
+ * 账号信息
+ */
 export interface IPersonal extends ICommonReturn {
   /**
    * 账号
@@ -92,7 +101,13 @@ export interface IPersonal extends ICommonReturn {
   avt: string
 }
 
+/**
+ * 提交记录详情
+ */
 export interface IListFormSubmitSummary extends ICommonReturn {
+  /**
+   * 表单信息
+   */
   fr: any[]
   cp: [
     /**
@@ -121,13 +136,26 @@ export interface IListFormSubmitSummary extends ICommonReturn {
      */
     nxt: number
     d: any[]
+    /**
+     * 提交时间字典
+     */
     mp_fsCA: { [key: string]: string }
+
     mpFrs: { [key: string]: any[] }
+    /**
+     * 地址字典
+     */
     mpLoc: { [key: string]: string }
+    /**
+     * 提交人字典
+     */
     mpCt: { [key: string]: string }
   }
 }
 
+/**
+ * 表单详情
+ */
 export interface IListFormSummary extends ICommonReturn {
   a: number
   u: number
@@ -244,17 +272,24 @@ export class MikeCRMAPI extends RequestBase {
    * 获取当前账号信息
    */
   getPersonalData(): Promise<IPersonal> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}settings/handleGetPersonalData.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}settings/handleGetPersonalData.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+          }
+        )
+      })
   }
 
   /**
@@ -262,20 +297,29 @@ export class MikeCRMAPI extends RequestBase {
    * @param form 表单编号
    */
   getListFormSubmitSummary(form: number): Promise<IListFormSubmitSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form_submit/handleGetListFormSubmitSummary.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { i: form } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${
+            this.options.apiHost
+          }form_submit/handleGetListFormSubmitSummary.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { i: form } }),
+            },
+          }
+        )
+      })
   }
 
   /**
@@ -287,57 +331,80 @@ export class MikeCRMAPI extends RequestBase {
     form: number,
     next: number
   ): Promise<IListFormSubmitSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form_submit/handleGetListFormSubmit_all.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { i: form, nxt: next } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form_submit/handleGetListFormSubmit_all.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { i: form, nxt: next } }),
+            },
+          }
+        )
+      })
   }
 
   /**
    * 获取表单详情
    */
   getListFormSummary(): Promise<IListFormSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form/handleGetListFormSummary.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form/handleGetListFormSummary.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+          }
+        )
+      })
   }
 
   /**
    * 获取完整表单详情
+   * @param pageNo 页码
+   * @param sort 排序字段
    */
   getListFormAll(pageNo: number, sort: number = 1): Promise<IListFormSummary> {
-    return (this.uvi ? Promise.resolve() : (this.login() as any)).then(() => {
-      return this.request(
-        `${this.options.apiHost}form/handleGetListForm_all.php`,
-        {
-          method: 'POST',
-          headers: {
-            Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
-          },
-          form: {
-            d: JSON.stringify({ cvs: { pgn: pageNo, sort: sort } }),
-          },
+    return Promise.resolve()
+      .then(() => {
+        if (this.uvi) {
+          return
         }
-      )
-    })
+        return this.login()
+      })
+      .then(() => {
+        return this.request(
+          `${this.options.apiHost}form/handleGetListForm_all.php`,
+          {
+            method: 'POST',
+            headers: {
+              Cookie: `PHPSESSID=${this.PHPSESSID}; uvi=${this.uvi}`,
+            },
+            form: {
+              d: JSON.stringify({ cvs: { pgn: pageNo, sort: sort } }),
+            },
+          }
+        )
+      })
   }
 }
 

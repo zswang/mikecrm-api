@@ -1,6 +1,6 @@
 {
   "name": "mikecrm-api",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "mikecrm API",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -43,5 +43,8 @@
   "dependencies": {
     "irequest": "^0.1.0",
     "request": "^2.88.0"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
